@@ -1,0 +1,16 @@
+import numpy as np
+import pandas as pd
+from pandas_datareader import data as wb
+import matplotlib.pyplot as plt
+
+import csv
+with open('Portfolio.csv', newline = ' ') as csvfile:
+        assets = csv.reader(csvfile, delimiter = ' ', quotechar='|')
+        for row in assets:
+            print(','.join(row))
+%matplotlib inline
+
+pf_data = pd.DataFrame()
+
+for a in assets:
+    pf_data[a] = wb.DataReader(a, data_source='yahoo', start='2009-01-01')['Adj Close']
